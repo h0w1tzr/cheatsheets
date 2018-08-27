@@ -1,0 +1,32 @@
+# nmap #
+nmap is the de-facto port scanning utility
+
+## Usage ##
+* Scanning on a slow network (-T# where the higher number means the faster the scan)
+  nmap -T[0 | 1 | 2] -v -sV -Pn -F -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+  
+* Scan top 100 well known ports, ignore discovery and writing all output formats
+  nmap -v -sV -Pn -F -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+  
+* Light banner grab, ignore discovery and writing all output formats
+  nmap -v -sV -Pn --version-intensity 0 -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+
+* Will scan the entire class C for ports associated with NetBIOS and SMB/CIFS
+  nmap -v -sV -Pn -oA <output_base_filname> -p 139,445 <ip_address>/24
+  
+* Executing a NSE script
+  nmap -v -sV -Pn -oA <output_base_filname> --script=<script_1> [<script_2>] [<script_n>] <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+  
+* Scan using default safe scripts
+  nmap -v -sV -sC -Pn -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+  
+* Find Information about IP addresses
+  nmap -v -sV -Pn -oA <output_base_filname> --script=asn-query,whois,ip-geolocation-maxmind <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+
+* Scan all TCP ports
+  nmap -sS -Pn -sV -p T:1-65535 -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+  
+* Scan all UDP ports
+  nmap -sU -Pn -p U:1-65535 -oA <output_base_filname> <<ip[/cidr] | -iL <input_file> | <begin_ip>-<end_ip>>
+
+  
